@@ -48,7 +48,7 @@ class AuthenticateController extends ApiController
         $campos['password'] = bcrypt($request->password);//encriptamos la contrasea
         $usuario = User::create($campos);
 
-        return $this->showOne($usuario, 'Usuario creado exitosamente!', 201);
+        return $this->showOne($usuario, "Usuario $usuario->name creado exitosamente!", 201);
     }
 
 

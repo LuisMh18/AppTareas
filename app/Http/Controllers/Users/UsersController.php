@@ -11,7 +11,7 @@ use JWTAuth;
 use Auth;
 use Tymon\JWTAuthExceptions\JWTException;
 
-use Illuminate\Support\Collection as Collection;
+//use Illuminate\Support\Collection as Collection;
 use DB;
 use Hash;
 
@@ -121,7 +121,7 @@ class UsersController extends ApiController
 
        $user->save();
 
-       return $this->showOne($user, 'Usuario actualizado exitosamente!', 201);
+       return $this->showOne($user, "Usuario $user->name actualizado exitosamente!", 201);
 
 
 
