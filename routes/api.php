@@ -28,4 +28,5 @@ Route::post('recover', 'Users\AuthenticateController@recover');
 //usuarios
 Route::resource('users', 'Users\UsersController', ['only' => ['index', 'show', 'update']]);
 Route::resource('tasks', 'Tasks\TasksController', ['except' => ['create', 'edit']]);
+Route::get('tasks/detail/{task}', 'Tasks\TasksController@detail');
 

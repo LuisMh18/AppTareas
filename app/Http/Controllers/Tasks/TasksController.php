@@ -77,6 +77,10 @@ class TasksController extends ApiController
       return $this->showOne($task); 
     }
 
+    public function detail(Task $task){
+      return $this->showOne($task); 
+    }
+
 
     /**
      * Update the specified resource in storage.
