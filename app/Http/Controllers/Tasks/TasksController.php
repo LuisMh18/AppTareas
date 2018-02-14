@@ -26,7 +26,13 @@ class TasksController extends ApiController
      */
     public function index()
     {
-        //
+        $tasks = DB::table('users')
+                        ->join('tasks', 'users.id', '=', 'tasks.user_id')
+                        ->select('tasks.id', 'name', 'title', 'description', 'tasks.created_at')
+                        ->orderBy('tasks.id', 'desc')
+                        ->get();
+
+        return $this->showAll($tasks);
     }
 
 
