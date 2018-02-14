@@ -21,7 +21,9 @@ class User extends Authenticatable
   //atributos que pueden ser asignados de manera masiva, una asignasion masiva de manera masiva en laravel cuando se realiza
   //el establecimiento de tal atributo por medio del metodo create o update
     protected $fillable = [
+        'role',
         'name', 
+        'surname',
         'email', 
         'password',
     ];
@@ -43,9 +45,17 @@ class User extends Authenticatable
         $this->attributes['name'] = strtolower($valor);//para que el nombre siempre se inserte en minuscula
       }
 
+      public function setSurnameAttribute($valor){
+        $this->attributes['surname'] = strtolower($valor);
+      }
+
       //accesor
       public function getNameAttribute($valor){
         //con esto estamos retornando el valor del nombre siempre con la primera letra de cada palabra en mayuscula sin la necesidad de modificarlo en la bd
+        return ucwords($valor);
+      }
+
+      public function getSurnameAttribute($valor){
         return ucwords($valor);
       }
 

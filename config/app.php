@@ -168,6 +168,9 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
 
+        //JWT
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -225,6 +228,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        //JWT
+      //  'JWTAuth'   => Tymon\JWTAuthFacades\JWTAuth::class,
+      //  'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class,
+
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class,
 
     ],
 
