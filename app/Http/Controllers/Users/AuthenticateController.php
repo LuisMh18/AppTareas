@@ -34,6 +34,7 @@ class AuthenticateController extends ApiController
         //reglas de validacion
         $rules = [
           'name' => 'required',
+          'surname' => 'required',
           'email' => 'required|email|unique:users',//el email debe de ser unico en la tabla usuarios
           'password' => 'required|min:6|confirmed',//la coontrasea debe de ser confirmada con un campo llamado password_confirmation
         ];
@@ -47,7 +48,7 @@ class AuthenticateController extends ApiController
         $campos['password'] = bcrypt($request->password);//encriptamos la contrasea
         $usuario = User::create($campos);
 
-        return $this->showOne($usuario, 201);
+        return $this->showOne($usuario, 'Usuario creado exitosamente!', 201);
     }
 
 
@@ -75,8 +76,8 @@ class AuthenticateController extends ApiController
             return $this->errorResponse('could_not_create_token.', 500);
         }
         // si no se encuentran errores, podemos devolver un token
-        return response()->json(['success' => true, 'data'=> [ 'token' => $token ]]);
-        //return $this->successResponse($token, 200);
+        //return response()->json(['status' => 'success', 'data'=> [ 'token' => $token ]]);
+        return $this->successResponse([ 'token' => $token ], 200);
     }
 
 

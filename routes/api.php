@@ -26,5 +26,5 @@ Route::get('logout', 'Users\AuthenticateController@logout');
 Route::post('recover', 'Users\AuthenticateController@recover');
 
 //usuarios
-Route::resource('users', 'Users\UsersController');
+Route::resource('users', 'Users\UsersController', ['only' => ['index', 'show', 'update']]);
 
