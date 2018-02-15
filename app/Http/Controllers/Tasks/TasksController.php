@@ -34,6 +34,18 @@ class TasksController extends ApiController
 
         $orden = ($request->order != '0') ? $request->order : 'desc';
         $campo = ($request->campo != '0') ? 'tasks.'.$request->campo : 'tasks.id';
+
+        if($request->search != ''){
+            $search = $request->search;
+            $tasks->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%'.$search.'%')
+                      ->orWhere('title',  'like', '%'.$search.'%')
+                      ->orWhere('description',  'like', '%'.$search.'%')
+                      ->orWhere('status',  'like', '%'.$search.'%')
+                      ->orWhere('tasks.created_at',  'like', '%'.$search.'%');
+            });
+        }
+                     
                         
         $tasks = $tasks->orderBy($campo, $orden)
         ->get();

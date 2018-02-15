@@ -29,5 +29,5 @@ Route::post('recover', 'Users\AuthenticateController@recover');
 Route::resource('users', 'Users\UsersController', ['only' => ['index', 'show', 'update']]);
 Route::resource('tasks', 'Tasks\TasksController', ['except' => ['create', 'edit']]);
 Route::get('tasks/detail/{task}', 'Tasks\TasksController@detail');
-Route::get('tasks/{order}/{campo}', 'Tasks\TasksController@index');
+Route::post('tasks', 'Tasks\TasksController@index');//busquedas y ordenacion de resultados
 
