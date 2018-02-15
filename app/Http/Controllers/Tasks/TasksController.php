@@ -139,8 +139,11 @@ class TasksController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        //$task = User::findOrFail($id);
+        $task->delete();
+
+        return $this->showOne($task, "Tarea $task->title eliminada exitosamente!");
     }
 }
