@@ -51,8 +51,6 @@ trait ApiResponser{
   }
 
 
-
-
   //metodo para la paginación 
   protected function paginate(Collection $collection)
   {
