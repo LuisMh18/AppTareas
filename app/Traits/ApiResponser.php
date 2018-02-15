@@ -25,12 +25,12 @@ trait ApiResponser{
 
 	}*/
 
-  protected function showAll(Collection $collection, $code = 200)
+  protected function showAll($data, $code = 200)
   {
 
-    $collection = $this->paginate($collection);//paginación
+    $data = $this->paginate($data);//paginación
 
-    return $this->successResponse($collection, $code);
+    return $this->successResponse($data, $code);
 
   }
 
@@ -52,7 +52,7 @@ trait ApiResponser{
 
 
   //metodo para la paginación 
-  protected function paginate(Collection $collection)
+  protected function paginate($data)
   {
 
     /*Reglas para permitirle al usuario definir el numero de la paginación, como minimo seran 2 y como maximo 50 */
@@ -70,9 +70,9 @@ trait ApiResponser{
       $perPage = (int) request()->per_page;
     }
 
-    $results = $collection->slice(($page - 1) * $perPage, $perPage)->values();
+    $results = $data->slice(($page - 1) * $perPage, $perPage)->values();
 
-    $paginated = new LengthAwarePaginator($results, $collection->count(), $perPage, $page, [
+    $paginated = new LengthAwarePaginator($results, $data->count(), $perPage, $page, [
       'path' => LengthAwarePaginator::resolveCurrentPath(),
     ]);
 

@@ -38,7 +38,7 @@ class TasksController extends ApiController
         $tasks = $tasks->orderBy($campo, $orden)
         ->get();
 
-        return $this->showAll(Collection::make($tasks));
+        return $this->showAll($tasks);
     }
 
 
