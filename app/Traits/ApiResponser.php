@@ -28,7 +28,6 @@ trait ApiResponser{
   protected function showAll(Collection $collection, $code = 200)
   {
 
-    $collection = $this->sortData($collection);//ordenación
     $collection = $this->paginate($collection);//paginación
 
     return $this->successResponse($collection, $code);
@@ -52,24 +51,7 @@ trait ApiResponser{
   }
 
 
-  /* metodo para la ordenación de resultados segun el cliente lo desee ya se por nombre, correo, etc
-   * recibe la colección de datos, y la transformación para poder identificar el atributo por el cual se va hacer la ordenación
-   * la ordenación se ordenara unicamente si recibimos un prametro en la url llamado sort_by, asi que primero
-   * verificamos si viene este atributo, si existe entonces obtenemos su valor para ordenarlo, por suerte como estaos haciendo uso de las
-   * colecciones de laravel tenemos aceso a multiples metodos lo cual incluye un metodo para ordenar la colección como tal que es el
-   * metodo sortBy el cual recibe el atributo q utilizaremos para ordenar, entonces obtenemos el atributo mandado que tiene que ser el 
-   * atributo como esta en la transformación y llamamos al metodo originalAttribute para comparar con el atributo original de la bd
-   */
-  protected function sortData(Collection $collection)
-  {
-    if (request()->has('sort_by')) {
-      $attribute = request()->sort_by;
 
-      $collection = $collection->sortBy->{$attribute};
-    }
-    return $collection;
-  }
-  
 
   //metodo para la paginación 
   protected function paginate(Collection $collection)

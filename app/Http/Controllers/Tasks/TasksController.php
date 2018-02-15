@@ -25,13 +25,18 @@ class TasksController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $tasks = DB::table('users')
                         ->join('tasks', 'users.id', '=', 'tasks.user_id')
-                        ->select('tasks.id', 'name', 'title', 'description', 'tasks.created_at')
-                        ->orderBy('tasks.id', 'desc')
-                        ->get();
+                        ->select('tasks.id', 'name', 'title', 'description', 'tasks.created_at');
+
+        $orden = ($request->order != '0') ? $request->order : 'desc';
+        $campo = ($request->campo != '0') ? 'tasks.'.$request->campo : 'tasks.id';
+                        
+        $tasks = $tasks->orderBy($campo, $orden)
+        ->get();
 
         return $this->showAll(Collection::make($tasks));
     }

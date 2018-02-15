@@ -26,7 +26,8 @@ Route::get('logout', 'Users\AuthenticateController@logout');
 Route::post('recover', 'Users\AuthenticateController@recover');
 
 //usuarios
-Route::resource('users', 'Users\UsersController', ['only' => ['index', 'show', 'update']]);
+Route::resource('users', 'Users\UsersController', ['only' => ['show', 'update']]);
 Route::resource('tasks', 'Tasks\TasksController', ['except' => ['create', 'edit']]);
 Route::get('tasks/detail/{task}', 'Tasks\TasksController@detail');
+Route::get('tasks/{order}/{campo}', 'Tasks\TasksController@index');
 
