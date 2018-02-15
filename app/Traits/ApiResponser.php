@@ -25,12 +25,13 @@ trait ApiResponser{
 
 	}*/
 
-  protected function showAll($data, $code = 200)
+  protected function showAll(Collection $collection, $code = 200)
   {
 
-    $data = $this->paginate($data);//paginación
+    //$collection = $this->sortData($collection);//ordenación
+    $collection = $this->paginate($collection);//paginación
 
-    return $this->successResponse(['data' => $data], $code);
+    return $this->successResponse($collection, $code);
 
   }
 
@@ -51,6 +52,7 @@ trait ApiResponser{
   }
 
 
+  //metodo para la paginación 
   protected function paginate(Collection $collection)
   {
 
@@ -63,7 +65,7 @@ trait ApiResponser{
 
     $page = LengthAwarePaginator::resolveCurrentPage();
 
-    $perPage = 15; //valor predifinido a la cantidad de elementos por pagina
+    $perPage = 10; //valor predifinido a la cantidad de elementos por pagina
     //si rcibimos el parametro per_page sustituimos el valor de la cantidad de elementos de pagina por defecto por el recibido
     if (request()->has('per_page')) {
       $perPage = (int) request()->per_page;

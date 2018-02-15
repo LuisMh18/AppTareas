@@ -12,6 +12,7 @@ use JWTAuth;
 use Auth;
 use Tymon\JWTAuthExceptions\JWTException;
 use DB;
+use Illuminate\Support\Collection as Collection;
 
 class TasksController extends ApiController
 {
@@ -32,7 +33,7 @@ class TasksController extends ApiController
                         ->orderBy('tasks.id', 'desc')
                         ->get();
 
-        return $this->showAll($tasks);
+        return $this->showAll(Collection::make($tasks));
     }
 
 

@@ -11,7 +11,7 @@ use JWTAuth;
 use Auth;
 use Tymon\JWTAuthExceptions\JWTException;
 
-//use Illuminate\Support\Collection as Collection;
+use Illuminate\Support\Collection as Collection;
 use DB;
 use Hash;
 
@@ -38,9 +38,7 @@ class UsersController extends ApiController
                         ->orderBy('id', 'desc')
                         ->get();
 
-        //$data = Collection::make($data);
-
-        return $this->showAll($data);
+        return $this->showAll(Collection::make($data));
     }
 
 
