@@ -77,7 +77,8 @@ class AuthenticateController extends ApiController
         }
         // si no se encuentran errores, podemos devolver un token
         //return response()->json(['status' => 'success', 'data'=> [ 'token' => $token ]]);
-        return $this->successResponse([ 'token' => $token ], 200);
+        //return $this->successResponse([ 'token' => $token ], 200);
+        return response()->json($token);
     }
 
 
