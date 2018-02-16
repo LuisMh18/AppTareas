@@ -28,17 +28,16 @@ class UsersController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $data['user_sesion'] = Auth::user(); //usuario que inicio sesion
-
         // Recuperar todos los usuarios de la base de datos y devolverlos
-        $data['users'] = DB::table('users')
+        $data = DB::table('users')
                         ->select('id', 'role', 'name', 'surname', 'email', 'created_at')
                         ->orderBy('id', 'desc')
                         ->get();
 
-        return $this->showAll(Collection::make($data));
+        return $this->showAll($data);
     }
 
 

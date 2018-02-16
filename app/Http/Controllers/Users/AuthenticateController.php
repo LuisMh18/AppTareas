@@ -20,7 +20,7 @@ class AuthenticateController extends ApiController
       // Aplicar el middleware jwt.auth a todos los métodos de este controlador
       // excepto el método authenticate. No queremos evitar
       // el usuario de recuperar su token si no lo tiene ya
-      $this->middleware('jwt.auth', ['except' => ['login', 'register', 'recover']]);
+      $this->middleware('jwt.auth', ['only' => ['user_data']]);
 
    }
     /**
@@ -79,6 +79,14 @@ class AuthenticateController extends ApiController
         //return response()->json(['status' => 'success', 'data'=> [ 'token' => $token ]]);
         //return $this->successResponse([ 'token' => $token ], 200);
         return response()->json($token);
+    }
+
+
+    public function user_data()
+    {
+        $data = Auth::user(); //usuario que inicio sesion
+
+        return response()->json(['data' => $data]);
     }
 
 
