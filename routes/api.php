@@ -31,4 +31,5 @@ Route::resource('users', 'Users\UsersController', ['only' => ['index', 'show', '
 Route::resource('tasks', 'Tasks\TasksController', ['except' => ['create', 'edit']]);
 Route::get('tasks/detail/{task}', 'Tasks\TasksController@detail');
 Route::post('tasks', 'Tasks\TasksController@index');//busquedas y ordenacion de resultados
+Route::post('tasks/store', 'Tasks\TasksController@store');//Crear tareas
 

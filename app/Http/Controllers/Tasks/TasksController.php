@@ -78,9 +78,6 @@ class TasksController extends ApiController
         $data['user_id'] = $user_id;
         $task = Task::create($data);
 
-
-        $task = Task::create($data);
-
         return $this->showOne($task, "Tarea $task->title creada exitosamente!", 201);
 
         
