@@ -23,13 +23,14 @@ return [
 
     'secret' => env('JWT_SECRET', '0aIhwPrwtfOVTaKZd9PCfYybD2SCLkD8'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | JWT time to live
-    |--------------------------------------------------------------------------
+    
+   /*
+    | ------------------------------------------------- -------------------------
+    | JWT tiempo de vivir
+    | ------------------------------------------------- -------------------------
     |
-    | Specify the length of time (in minutes) that the token will be valid for.
-    | Defaults to 1 hour
+    | Especifique el período de tiempo (en minutos) durante el cual será válido el token.
+    | Predeterminado a 1 hora
     |
     */
 
