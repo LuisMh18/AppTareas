@@ -30,7 +30,7 @@ class TasksController extends ApiController
 
         $tasks = DB::table('users')
                         ->join('tasks', 'users.id', '=', 'tasks.user_id')
-                        ->select('tasks.id', 'name', 'title', 'description', 'tasks.created_at')
+                        ->select('tasks.id', 'name', 'status', 'title', 'description', 'tasks.created_at')
                         ->where('users.id', Auth::user()->id);
 
         $orden = ($request->order != '0') ? $request->order : 'desc';
