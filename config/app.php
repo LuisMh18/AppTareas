@@ -171,6 +171,9 @@ return [
         //JWT
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
+        //cors
+        Barryvdh\Cors\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
