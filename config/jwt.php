@@ -36,15 +36,16 @@ return [
 
     'ttl' => 60,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Refresh time to live
-    |--------------------------------------------------------------------------
+    
+   /*
+    | ------------------------------------------------- -------------------------
+    | Actualiza el tiempo para vivir
+    | ------------------------------------------------- -------------------------
     |
-    | Specify the length of time (in minutes) that the token can be refreshed
-    | within. I.E. The user can refresh their token within a 2 week window of
-    | the original token being created until they must re-authenticate.
-    | Defaults to 2 weeks
+    | Especifique el período de tiempo (en minutos) que se puede actualizar el token
+    | dentro. ES DECIR. El usuario puede actualizar su token dentro de una ventana de 2 semanas de
+    | el token original que se está creando hasta que deben volver a autenticarse.
+    | Predeterminado a 2 semanas
     |
     */
 

@@ -34,7 +34,8 @@ class TasksController extends ApiController
                         ->where('users.id', Auth::user()->id);
 
         $orden = ($request->order != '0') ? $request->order : 'desc';
-        $campo = ($request->campo != '0') ? 'tasks.'.$request->campo : 'tasks.id';
+        $task_or_user = ($request->campo != '0' && $request->campo == 'name') ? 'users.' : 'tasks.';
+        $campo = ($request->campo != '0') ? $task_or_user.$request->campo : 'tasks.id';
 
         if($request->search != ''){
             $search = $request->search;
