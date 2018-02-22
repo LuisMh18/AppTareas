@@ -12,18 +12,6 @@ trait ApiResponser{
       return response()->json(['data' => $data], $code);
   }
 
-  //metodo para los mensajes de error
-  public function errorResponse($message, $code){
-      return response()->json(['error' => $message, 'code' => $code], $code);
-  }
-
-  //metodo para mostrar una respuesta de elementos
-  /*protected function showAll(Collection $collection, $code = 200)
-	{
-
-		return $this->successResponse(['data' => $collection], $code);
-
-	}*/
 
   protected function showAll($data, $code = 200)
   {
@@ -43,11 +31,6 @@ trait ApiResponser{
                     ],
                      $code
                    );
-  }
-
-  
-  public function showMessage($message, $code = 200){
-    return $this->successResponse(['message' => $message], $code);
   }
 
 

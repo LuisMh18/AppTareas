@@ -55,12 +55,19 @@ class AuthenticateController extends ApiController
 
     public function login(Request $request)
     {
-        $rules = [
+        $validate = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
-        ];
+        ]);
 
-        $this->validate($request, $rules);
+
+        if ($validate->fails()) {
+            return response()->json([
+             'error' => 'validate',
+             'errors' => $validate->errors(),
+             'code' => 422
+            ]);
+        }
 
         $credentials = $request->only('email', 'password');
 
@@ -69,11 +76,19 @@ class AuthenticateController extends ApiController
               if (!$token = JWTAuth::attempt($credentials)) {
                   /*-- Nota:
                    * Error 401 - no autorizado: -> indica que se denegó el acceso a causa de las credenciales no válidas.*/
-                  return $this->errorResponse('El email o la contraseña son incorrectos.', 401);
+                  return response()->json([
+                           'error' => true,
+                           'message' => 'El email o la contraseña son incorrectos',
+                            401
+                  ]);
               }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return $this->errorResponse('could_not_create_token.', 500);
+            return response()->json([
+                           'error' => true,
+                           'message' => 'No se pudo crear token, intentelo otravez.',
+                            500
+                  ]);
         }
         // si no se encuentran errores, podemos devolver un token
         //return response()->json(['status' => 'success', 'data'=> [ 'token' => $token ]]);
@@ -94,10 +109,18 @@ class AuthenticateController extends ApiController
         $this->validate($request, ['token' => 'required']);
         try {
             JWTAuth::invalidate($request->input('token'));
-            return $this->showMessage('Tu sesión ha sido serrada correctamente.');
+            return response()->json([
+                           'error' => false,
+                           'message' => 'Tu sesión ha sido serrada correctamente.',
+                            200
+                  ]);
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return $this->errorResponse('Error al cerrar la sesión, intente de nuevo.', 500);
+            return response()->json([
+                           'error' => true,
+                           'message' => 'Error al cerrar la sesión, intente de nuevo.',
+                            500
+                  ]);
         }
     }
 
@@ -106,8 +129,11 @@ class AuthenticateController extends ApiController
     {
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            $error_message = "Tu dirección de correo electrónico no fue encontrada.";
-            return response()->json(['success' => false, 'error' => ['email'=> $error_message]], 401);
+            return response()->json([
+                           'error' => true,
+                           'message' => 'Tu dirección de correo electrónico no fue encontrada.',
+                            401
+                  ]);
         }
         try {
             Password::sendResetLink($request->only('email'), function (Message $message) {
@@ -119,8 +145,10 @@ class AuthenticateController extends ApiController
             return response()->json(['success' => false, 'error' => $error_message], 401);
         }
         return response()->json([
-            'success' => true, 'data'=> ['message'=> '¡Se ha enviado un correo electrónico de reinicio! Por favor revise su correo electrónico.']
-        ]);
+                           'error' => false,
+                           'message' => '¡Se ha enviado un correo electrónico de reinicio! Por favor revise su correo electrónico.',
+                            401
+                  ]);
     }
 
 }
